@@ -64,8 +64,8 @@
         "aaniksahaa",
         "mraible"
       ];
-
-      const token = import.meta.env.VITE_GITHUB_TOKEN; // use your token here
+      import {VITE_GITHUB_TOKEN } from './env.js';
+      const token = VITE_GITHUB_TOKEN; 
 
 admiredDevs.forEach((username) => {
   fetch(`https://api.github.com/users/${username}`, {
