@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub - YaPlatter</title>
+
+    <!-- Jersey 10 Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet" />
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Jersey 10', cursive;
+      }
+      .btn-nav {
+        background-color: #e7e3b9;
+        color: black;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+        border-radius: 0.375rem;
+        box-shadow: 0px 4px 0px #e9b6b6;
+        transition: all 0.2s ease;
+      }
+      .btn-nav:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 6px 0px #e9b6b6;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-900 text-white">
+    <!-- Navbar -->
+    <header class="bg-black py-4 px-6 flex justify-between items-center">
+      <h1 class="text-xl font-bold">YaPlatter</h1>
+      <div class="flex gap-4 items-center">
+        
+        <button onclick="logout()" class="btn-nav text-black">
+            Logout
+          </button>
+      </div>
+    </header>
+
+    <nav class="bg-gray-800 py-3 flex justify-center space-x-6">
+      <a href="home.html" class="btn-nav">Home</a>
+      <a href="github.html" class="btn-nav">GitHub</a>
+      <a href="uiux.html" class="btn-nav">UI/UX</a>
+      <a href="software.html" class="btn-nav">Software</a>
+      <a href="articles.html" class="btn-nav">Articles</a>
+      <a href="contact.html" class="btn-nav">Contact</a>
+    </nav>
+
+    <!-- GitHub Section -->
+    <section id="github" class="p-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3"></section>
+
+    <script>
+      const container = document.getElementById("github");
+
+      // Admired GitHub profiles
+      const admiredDevs = [
+        "vercel",
+        "SinghShreyansh",
+        "aaniksahaa",
+        "mraible"
+      ];
+
+      const token = import.meta.env.VITE_GITHUB_TOKEN; // use your token here
+
+admiredDevs.forEach((username) => {
+  fetch(`https://api.github.com/users/${username}`, {
+    headers: {
+      Authorization: `token ${token}`
+    }
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (!data || !data.login || data.message === "Not Found") {
+        console.warn(`GitHub user "${username}" not found or fetch failed.`);
+        return;
+      }
+
+      const card = document.createElement("div");
+      card.className = "bg-gray-800 p-4 rounded-lg shadow-lg hover:bg-gray-700 transition duration-300";
+      card.innerHTML = `
+        <div class="flex items-center space-x-4">
+          <img src="${data.avatar_url}" alt="${data.login}" class="w-16 h-16 rounded-full border-2 border-yellow-500" />
+          <div>
+            <h3 class="text-xl font-normal">${data.name || data.login}</h3>
+            <p class="text-sm text-gray-300">@${data.login}</p>
+            <p class="text-sm">Followers: ${data.followers}</p>
+            <a href="${data.html_url}" target="_blank" class="text-yellow-400 hover:underline">View Profile</a>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    })
+    .catch((err) => console.error(`Failed to fetch ${username}:`, err));
+});
+
+
+      // Admired Repositories
+      const featuredRepos = [
+        {
+          name: "DevOps_Books",
+          owner: "rohitg00",
+          repo: "DevOps_Books"
+        },
+        {
+          name: "DSA-Bootcamp-Java",
+          owner: "kunal-kushwaha",
+          repo: "DSA-Bootcamp-Java"
+        },
+        {
+          name: "baeldung",
+          owner: "baeldung",
+          repo: "tutorials"
+        },
+        {
+            name: "Books",
+            owner: "MethkupalliVasanth",
+            repo: "Books"
+        }
+      ];
+
+      
+
+featuredRepos.forEach(({ owner, repo }) => {
+  fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+    headers: {
+      Authorization: `token ${token}`
+    }
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (!data || !data.full_name) {
+        console.warn(`Repo "${owner}/${repo}" not found or fetch failed.`);
+        return;
+      }
+
+      const repoCard = document.createElement("div");
+      repoCard.className = "bg-gray-700 p-4 rounded shadow-lg border border-yellow-600";
+      repoCard.innerHTML = `
+        <h3 class="text-lg font-normal">${data.full_name}</h3>
+        <p class="text-sm text-gray-300 mb-2">${data.description || "No description available."}</p>
+        <a href="${data.html_url}" class="text-yellow-300 hover:underline" target="_blank">View Repository</a>
+      `;
+      container.appendChild(repoCard);
+    })
+    .catch((err) => console.error(`Failed to fetch repo ${owner}/${repo}:`, err));
+});
+
+    </script>
+    <script>
+        function logout() {
+          // Clear any auth-related data (example for localStorage-based login)
+          localStorage.removeItem("token"); // or use sessionStorage.removeItem("token")
+          window.location.href = "index.html"; // redirect to login page
+        }
+      </script>
+  </body>
+</html>
