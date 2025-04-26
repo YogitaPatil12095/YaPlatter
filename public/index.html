@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Signup - YaPlatter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+
+  <style>
+    /* (your same CSS, no changes needed) */
+    body {
+      font-family: 'Jersey 10', cursive;
+      background: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      width: 320px;
+      transition: all 0.3s ease;
+    }
+
+    .card h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #facc15;
+    }
+
+    .inputBox {
+      position: relative;
+      margin: 1rem 0;
+    }
+
+    .inputBox input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: transparent;
+      border: 1px solid #facc15;
+      border-radius: 0.5rem;
+      color: white;
+      outline: none;
+    }
+
+    .inputBox span {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      color: #facc15;
+      pointer-events: none;
+      transition: 0.3s;
+    }
+
+    .inputBox input:focus + span,
+    .inputBox input:not(:placeholder-shown) + span {
+      top: 0.25rem;
+      left: 1rem;
+      font-size: 0.75rem;
+      background: #1e293b;
+      padding: 0 0.25rem;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      background: #facc15;
+      color: black;
+      font-weight: bold;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .toggle {
+      margin-top: 1rem;
+      text-align: center;
+      color: #ccc;
+    }
+
+    .toggle a {
+      color: #facc15;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card" id="form-card">
+    <h2 id="form-title">Login</h2>
+    <p id="message" style="color: #facc15; text-align: center; margin-top: 1rem;"></p>
+
+    <form id="auth-form">
+      <div class="inputBox" id="login-email-field">
+        <input type="email" id="login-email" placeholder=" " required />
+        <span>Email</span>
+      </div>
+      <div class="inputBox">
+        <input type="password" id="password" placeholder=" " required />
+        <span>Password</span>
+      </div>
+      <div class="inputBox" id="signup-email-field" style="display: none;">
+        <input type="email" id="signup-email" placeholder=" " />
+        <span>Confirm Email</span>
+      </div>
+      <button type="submit" class="btn" id="submit-btn">Login</button>
+      <div class="toggle">
+        <span id="toggle-text">Don't have an account? <a id="toggle-link">Sign up</a></span>
+      </div>
+    </form>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+export const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const toggleLink = document.getElementById("toggle-link");
+const formTitle = document.getElementById("form-title");
+const signupEmailField = document.getElementById("signup-email-field");
+const submitBtn = document.getElementById("submit-btn");
+
+let isLogin = true;
+
+toggleLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  isLogin = !isLogin;
+
+  formTitle.textContent = isLogin ? "Login" : "Sign Up";
+  signupEmailField.style.display = isLogin ? "none" : "block";
+  submitBtn.textContent = isLogin ? "Login" : "Sign Up";
+  
+  // Update link text
+  toggleLink.textContent = isLogin ? "Sign up" : "Login";
+  toggleLink.parentElement.innerHTML = isLogin
+    ? `Don't have an account? <a id="toggle-link" href="#">Sign up</a>`
+    : `Already have an account? <a id="toggle-link" href="#">Login</a>`;
+
+  // Re-attach listener again because innerHTML was replaced
+  document.getElementById("toggle-link").addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleLink.click();
+  });
+});
+
+
+    // Handle form submission
+    document.getElementById("auth-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = isLogin 
+        ? document.getElementById("login-email").value
+        : document.getElementById("signup-email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        if (isLogin) {
+          const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+          });
+          if (error) throw error;
+          alert("Login successful!");
+          window.location.href = "home.html";
+        } else {
+          const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+          });
+          if (error) throw error;
+          alert("Sign up successful! Please check your email to confirm.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert(err.message || "Something went wrong!");
+      }
+    });
+  </script>
+
+</body>
+</html>

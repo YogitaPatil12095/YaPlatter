@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI/UX - YaPlatter</title>
+
+    <!-- Jersey 10 Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet" />
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Jersey 10', cursive;
+      }
+      .btn-nav {
+        background-color: #e7e3b9;
+        color: black;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+        border-radius: 0.375rem;
+        box-shadow: 0px 4px 0px #e9b6b6;
+        transition: all 0.2s ease;
+      }
+      .btn-nav:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 6px 0px #e9b6b6;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-900 text-white">
+    <!-- Navbar -->
+    <header class="bg-black py-4 px-6 flex justify-between items-center">
+      <h1 class="text-xl font-bold">YaPlatter</h1>
+      <div class="flex gap-4 items-center">
+
+        
+        <button onclick="logout()" class="btn-nav text-black">
+            Logout
+          </button>
+      </div>
+    </header>
+
+    <nav class="bg-gray-800 py-3 flex justify-center space-x-6">
+      <a href="home.html" class="btn-nav">Home</a>
+      <a href="github.html" class="btn-nav">GitHub</a>
+      <a href="uiux.html" class="btn-nav">UI/UX</a>
+      <a href="software.html" class="btn-nav">Software</a>
+      <a href="articles.html" class="btn-nav">Articles</a>
+      <a href="contact.html" class="btn-nav">Contact</a>
+    </nav>
+
+    <!-- UI/UX Section -->
+    <!-- UI/UX Section -->
+<section class="p-8">
+    <h2 class="text-4xl mb-6">UI/UX Tools & Showcases</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+  
+      <!-- Icons -->
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">Phosphor Icons</h3>
+        <p class="text-sm text-gray-300">Flexible and bold icon library for web and mobile interfaces.</p>
+        <a href="https://phosphoricons.com" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <!-- Fonts -->
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">Google Fonts</h3>
+        <p class="text-sm text-gray-300">Huge collection of free and open-source web fonts.</p>
+        <a href="https://fonts.google.com" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">Free Faces</h3>
+        <p class="text-sm text-gray-300">Curated collection of open-source typefaces.</p>
+        <a href="https://freefaces.gallery" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <!-- Animations -->
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">UIverse</h3>
+        <p class="text-sm text-gray-300">Library of open-source UI elements and micro-interactions.</p>
+        <a href="https://uiverse.io" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <!-- Mockups -->
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">MockupBro</h3>
+        <p class="text-sm text-gray-300">Free browser-based mockup generator with templates.</p>
+        <a href="https://mockupbro.com" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">Graphic Burger</h3>
+        <p class="text-sm text-gray-300">Free design resources including PSD mockups, UI kits and more.</p>
+        <a href="https://graphicburger.com" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">ContentCore</h3>
+        <p class="text-sm text-gray-300">Mockups and visual resources tailored for creators and designers.</p>
+        <a href="https://contentcore.xyz" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">WannaThis</h3>
+        <p class="text-sm text-gray-300">Premium UI/UX kits and mockups to enhance your creative process.</p>
+        <a href="https://wannathis.one" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <!-- Logos -->
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">Logopond</h3>
+        <p class="text-sm text-gray-300">Showcase of creative and inspiring logo designs.</p>
+        <a href="https://logopond.com" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">Logobook</h3>
+        <p class="text-sm text-gray-300">Curated collection of beautiful, minimal logos from around the world.</p>
+        <a href="https://logobook.com" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <!-- Fonts & Contrast -->
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">Color Contrast Checker</h3>
+        <p class="text-sm text-gray-300">Ensure optimal font color contrast for accessibility and clarity.</p>
+        <a href="https://colorcontrast.cc" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <!-- Figma to Functional -->
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">Bolt.new</h3>
+        <p class="text-sm text-gray-300">Convert your Figma designs directly into working components.</p>
+        <a href="https://bolt.new" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">Wix Studio</h3>
+        <p class="text-sm text-gray-300">Professional studio tools for turning Figma into functional sites.</p>
+        <a href="https://wixstudio.com" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+  
+      <!-- Grids -->
+      <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition shadow-lg">
+        <h3 class="text-2xl mb-2 text-yellow-300">BentoGrids</h3>
+        <p class="text-sm text-gray-300">Layout inspiration and UI templates using bento box grids.</p>
+        <a href="https://bentogrids.com" target="_blank" class="text-yellow-400 hover:underline mt-2 inline-block">Explore</a>
+      </div>
+    </div>
+  </section>
+  <script>
+    function logout() {
+      // Clear any auth-related data (example for localStorage-based login)
+      localStorage.removeItem("token"); // or use sessionStorage.removeItem("token")
+      window.location.href = "index.html"; // redirect to login page
+    }
+  </script>
+  </body>
+</html>
